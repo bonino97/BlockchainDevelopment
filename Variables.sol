@@ -27,4 +27,22 @@ contract Variables {
     //Push, pop and Length are possible in solidity.
 
     /* Mappings */
+
+    mapping(string => bool) public stringMapsToBoolean;
+
+    /* Enum */
+    enum Countries {Argentina, EstadosUnidos, Italia}
+    Countries public country = Countries.Argentina;
+
+    /* Structs */
+    struct Student {
+        string name;
+        int256 yearsOld;
+        string city;
+        string street;
+        string university;
+        int256 average;
+    }
+
+    Student public studentOne;
 }
