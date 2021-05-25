@@ -11,6 +11,7 @@ contract Basics {
     int8 public numberTwo = 2; // 2^8 = 256
     int16 public numberThree = 3; // 2^16 = 65000 
     uint8 public numberFour = 10; // Only positives numbers.
+    uint public msgValue;
     
     /* Boolean */
     bool public booleanVar = true;
@@ -21,6 +22,10 @@ contract Basics {
     
     /* Bytes */
     bytes public byteVar = 'abc'; // 0x616263
+    
+    /* Address */
+    address payable public investor;
+    address public owner;
     
     /* Arrays */
     string[] public dynamicArray; //Dynamic Array. Without max.
@@ -49,6 +54,12 @@ contract Basics {
     Student public studentTwo;
     
     int public sum = 0;
+    
+    /* Constructor */
+ 
+    constructor() public{ // Used to initiate values on variables.
+        owner = msg.sender; // Deployer of the contract.
+    }    
     
     /* Functions */
     
@@ -108,5 +119,34 @@ contract Basics {
         int swapTemp = normalInteger; // No need to pay gas fee for local variables
         normalInteger = 10;
         sum = swapTemp;
+    }
+    
+    /* Payable Functions */
+    
+    function payMoney() payable public { // Can accept money from people.
+        //Do something
+    }
+    
+    function getBalance() view public returns(uint) {
+        return address(this).balance / 1e18;
+    }
+    
+    function sendMoney() public {
+        investor = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+        investor.transfer(address(this).balance);
+    }
+    
+    /* Global Variables */
+    
+    function getValues() public view returns(uint blockNumber, uint blockTimestamp, address msgSender, bytes calldata msgData) {
+        // Block Number - uint -> Block number where Blockchain is working on.
+        // Block TimeStamp - uint
+        // Msg Sender - address -> Person who is calling this contract.
+        // Msg Data - bytes
+        return (block.number, block.timestamp, msg.sender, msg.data);
+    }
+    
+    function payToContract() payable public {
+        msgValue = msg.value; // Value sended by user.
     }
 }
