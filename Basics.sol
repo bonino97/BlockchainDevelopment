@@ -231,3 +231,25 @@ contract Basics {
         );
     }
 }
+
+
+/* Inheritance */
+
+contract Country {
+    string public name;
+    int public a;
+    
+    constructor(int _a) public {
+        a = _a;
+    }
+}
+
+contract Argentina {
+    uint public zipCode;
+}
+
+contract BuenosAires is Country(10), Argentina {
+    uint public phone;
+}
+
+
